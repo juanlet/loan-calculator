@@ -1,9 +1,12 @@
+const results = document.getElementById('results');
+const loader = document.getElementById('loading');
 // Listen for submit
+
 document.getElementById('loan-form').addEventListener('submit', function(e){
     // Hide results
-      document.getElementById('results').style.display = 'none';
+      results.style.display = 'none';
     //Show loader
-    document.getElementById('loading').style.display = 'block';
+    loader.style.display = 'block';
 
      setTimeout(calculateResults, 800);
     e.preventDefault();
@@ -32,8 +35,8 @@ function calculateResults(){
        monthlyPayment.value = monthly.toFixed(2);
        totalPayment.value = (monthly * calculatedPayments).toFixed(2);
        totalInterest.value = ((monthly * calculatedPayments)- principal).toFixed(2);
-       document.getElementById('results').style.display = 'block';
-       document.getElementById('loading').style.display = 'none';
+       results.style.display = 'block';
+       loader.style.display = 'none';
      }else{
         showError('Please check your numbers');
      }
@@ -42,6 +45,12 @@ function calculateResults(){
 
 // Show Error
 function showError(error){
+    
+   // hide results and loading
+   results.style.display = 'none';
+
+   loader.style.display = 'none';    
+    
   // Create a div
   const errorDiv = document.createElement('div');
   // Get Elements
@@ -56,8 +65,8 @@ function showError(error){
   // Insert error above heading
   card.insertBefore(errorDiv, heading);
 
-  // Clear error after 3 seconds
-  setTimeout(clearError, 3000);
+  // Clear error after 2 seconds
+  setTimeout(clearError, 2000);
 
 }
 
